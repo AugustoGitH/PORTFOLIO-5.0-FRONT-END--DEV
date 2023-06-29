@@ -11,8 +11,8 @@ interface IUseProject {
 
 const useProject = (project: IProjectPublic): IUseProject => {
   const [likes, setLikes] = useState(project.likes);
-  const [views, setViews] = useState(project.views);
   a;
+  const [views, setViews] = useState(project.views);
 
   const viewProject = (): void => {
     setViews((prevViews) => prevViews + 1);
