@@ -4,6 +4,7 @@ import ancors from "@/settings/ancors"
 
 import Image from "next/image"
 
+import PercentagesUsedTechs from "./components/PercentagesUsedTechs"
 import * as S from "./styles"
 const About = (): JSX.Element => {
   return (
@@ -44,6 +45,7 @@ const About = (): JSX.Element => {
           <span><i className='bx bxs-doughnut-chart'></i></span>
           <h2>Porcentagem das tecnologias usadas em meus projetos</h2>
         </div>
+        <PercentagesUsedTechs />
       </S.InfoPercentTechs>
       <S.ContactMe id="contact">
         <h3>Vamos conversar?</h3>

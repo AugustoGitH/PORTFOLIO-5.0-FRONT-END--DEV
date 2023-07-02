@@ -1,3 +1,4 @@
+
 import { presenceAnimation } from '@/animation/presence';
 import roots from '@/styles/roots';
 import { styled } from 'styled-components';
@@ -5,20 +6,19 @@ import { styled } from 'styled-components';
 export const ProjectList = styled.div`
   width: 100%;
   max-height: calc(((230px + 3rem) * 3) + (3rem * 3));
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   gap: 3rem;
-  padding-right: 1rem;
-  padding-bottom: 3rem;
+  padding: 0 1rem 3rem 0;
   @media (max-width: ${roots.screens.XXLG}) {
     gap: 4rem;
   }
   @media (max-width: ${roots.screens.XSM}) {
-    padding: 0 0.5rem;
   }
   &::-webkit-scrollbar {
     width: 3px;
@@ -38,29 +38,35 @@ export const ProjectList = styled.div`
   .project:last-child {
     border-bottom: none;
   }
-  .loader-projects {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5rem 0;
-  }
-  .not-projects {
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ${presenceAnimation({
-      animation: 'scale',
-      duration: 0.3
-    })};
-    span {
-      display: inline-block;
-      background-color: #ffffff14;
-      color: #ffffffab;
-      padding: 0.3rem 1rem;
-      border-radius: 0.3rem;
-      cursor: default;
-    }
-  }
+
 `;
+
+export const HelperText = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  span{
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background-color: ${roots.color.PRIMARY_X_LIGHT};
+    padding: .7rem 1rem;
+    border-radius: .6rem;
+    font-size: ${roots.font.size.XSM};
+    line-height: calc(${roots.font.line_heigth.XSM} - .1rem);
+    font-weight: bold;
+    text-transform: uppercase;
+    max-width: 350px;
+
+    color: #ffffffc1;
+    ${presenceAnimation({
+  animation: "scale",
+  duration: .3
+})}
+i{
+  font-size: 1.1rem;
+  color: ${roots.color.ALERT}
+}
+  }
+`

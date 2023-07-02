@@ -1,4 +1,8 @@
-import { type TRoutesProjectPrivate, type TRoutesProjectPublic } from './types';
+import {
+  type TRoutesAuthPublic,
+  type TRoutesProjectPrivate,
+  type TRoutesProjectPublic
+} from './types';
 import assignRoutes from './utils';
 
 const apiRoutes = {
@@ -7,6 +11,10 @@ const apiRoutes = {
       GET_PROJECTS: '/get-projects',
       LIKE_PROJECT: '/like-project',
       VIEW_PROJECT: '/:idProject'
+    }),
+    ...assignRoutes<Record<TRoutesAuthPublic, string>>('/auth', {
+      LOGIN: '/login',
+      VERIFY_CREDENTIALS: '/verify-credentials'
     })
   },
   private: {
@@ -23,7 +31,5 @@ const apiRoutes = {
     )
   }
 };
-
-console.log(apiRoutes);
 
 export default apiRoutes;

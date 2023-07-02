@@ -8,10 +8,20 @@ import { type IProjectPublic } from '@/types/Project';
 import { type InferGetServerSidePropsType, type GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps<{ projects: IProjectPublic[] | null }> = async () => {
-  const { projects } = await getProjectsService()
-  return {
-    props: {
-      projects
+  try {
+    const { projects } = await getProjectsService()
+    return {
+      props: {
+        projects
+      },
+      revalidate: 60 * 70
+    }
+  } catch (error) {
+    return {
+      props: {
+        projects: null,
+      },
+      revalidate: 60
     }
   }
 }

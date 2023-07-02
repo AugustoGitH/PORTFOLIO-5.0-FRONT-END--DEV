@@ -193,8 +193,7 @@ export const ContactMe = styled.section`
 
 export const TextCopyRigth = styled.p`
   width: 100%;
-  position: absolute;
-  bottom: 2rem;
+  margin-top: 5rem;
   text-align: center;
   line-height: 1rem;
 `;

@@ -1,13 +1,16 @@
-import image from '@/assets/images/profile-01.webp';
+
+import useProject from '@/hooks/project/public/useProject';
 import ImagesCover from '@/templates/Home/sections/Portfolio/sections/PortfolioProjects/components/ProjectList/components/Project/components/ImagesCover';
 
+import PopUpPercentTechs from './components/PopUpPercentTechs';
 import * as S from './styles';
 import { type IProjectProps } from './types';
 
-const Project = ({ project }: IProjectProps): JSX.Element => {
+const Project = ({ project, order }: IProjectProps): JSX.Element => {
+  const { likeProject, viewProject, likes, views, wasLiked, editStatesShowPercentageTechs, handleOpenPercentTechs, statesShowPercentageTechs } = useProject(project)
   return (
-    <S.Project className="project">
-      <ImagesCover cover={image.src} images={[image.src]} />
+    <S.Project className="project" order={order}>
+      <ImagesCover cover={project.images.cover} images={project.images.images} />
       <S.Description>
         <ul className="technologies">
           {project.technologiesUsed.map(tech => (
@@ -21,7 +24,7 @@ const Project = ({ project }: IProjectProps): JSX.Element => {
             <a
               href={project.websiteLink}
               target="_blank"
-              // onClick={handleClickViewProject}
+              onClick={viewProject}
               rel="noreferrer"
             >
               Visitar
@@ -32,7 +35,7 @@ const Project = ({ project }: IProjectProps): JSX.Element => {
             <a
               href={project.videoLink}
               target="_blank"
-              // onClick={handleClickViewProject}
+              onClick={viewProject}
               rel="noreferrer"
             >
               Preview
@@ -47,19 +50,34 @@ const Project = ({ project }: IProjectProps): JSX.Element => {
           )}
         </nav>
         <ul className="statistics">
+          <li className="button-percent-techs" onClick={handleOpenPercentTechs}>
+            <i className='bx bxs-bar-chart-alt-2'></i>
+          </li>
           <li
-            className={`button-like ${"true ? 'liked' : ''"}`}
-          // onClick={handleClickLikedProject}
+            className={`button-like ${wasLiked ? "liked" : ""}`}
+            onClick={likeProject}
           >
             <i className="bx bxs-like"></i>
           </li>
-          {/* <li>
-            {countLikes} {`curtida${countLikes === 1 ? '' : 's'}`}
+          <li>
+            {likes} {`curtida${likes === 1 ? '' : 's'}`}
           </li>
           <li>
-            {countViews} {`visualizaç${countViews === 1 ? 'ão' : 'ões'}`}
-          </li> */}
+            {views} {`visualizaç${views === 1 ? 'ão' : 'ões'}`}
+          </li>
         </ul>
+        <PopUpPercentTechs
+          show={statesShowPercentageTechs[project._id]}
+          percents={{
+            "html": 2000,
+            "css": 3000,
+            "javascript": 300,
+            "ejs": 300,
+            "typescript": 5000
+          }}
+          onClose={() => { editStatesShowPercentageTechs(prevStates => ({ ...prevStates, [project._id]: false })); }}
+          technologies={["html5", "css3", "javascript", "ejs", "typescript"]}
+        />
       </S.Description>
     </S.Project>
   );

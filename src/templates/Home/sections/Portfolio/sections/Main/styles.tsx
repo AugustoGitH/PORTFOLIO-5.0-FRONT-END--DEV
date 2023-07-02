@@ -27,9 +27,11 @@ export const TechPresentation = styled.div`
     width: 100%;
     align-items: flex-start;
     text-align: start;
+    padding-left: 3rem;
   }
   @media (max-width: ${roots.screens.LG}) {
     width: auto;
+    padding-left: 0;
   }
   @media (max-width: ${roots.screens.SM}) {
     width: 100%;
@@ -87,7 +89,7 @@ export const TechPresentation = styled.div`
   .skills {
     p {
       font-weight: bold;
-      font-size: 1rem;
+      font-size: ${roots.font.size.SM};
     }
     ul {
       display: flex;
@@ -101,7 +103,7 @@ export const TechPresentation = styled.div`
         padding: 0.3rem 0.9rem;
         border-radius: 0.5rem;
         font-size: ${roots.font.size.SM};
-        color: rgba(255, 255, 255, 0.932);
+        color: rgba(255, 255, 255, 0.775);
         position: relative;
         cursor: default;
         transition: 0.3s;
@@ -124,6 +126,7 @@ export const TechPresentation = styled.div`
         }
         &:hover {
           border: 1.5px solid ${roots.color.LIGTH};
+          color: ${roots.color.LIGTH};
         }
         &:hover::after {
           height: 0%;
@@ -141,7 +144,7 @@ export const TechPresentation = styled.div`
     border-radius: 1.3rem;
     font-weight: bold;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: ${roots.font.size.SM};
     text-transform: capitalize;
     margin-top: 3rem;
     border: 1.5px solid ${roots.color.ALERT};

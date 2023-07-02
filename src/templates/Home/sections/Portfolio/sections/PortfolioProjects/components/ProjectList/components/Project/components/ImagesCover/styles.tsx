@@ -20,9 +20,9 @@ export const ImagesCover = styled.div`
   }
   .cover {
     width: 100%;
-    height: 70%;
+    height: 75%;
     border-radius: 0.5rem;
-    background-color: #e8ecec21;
+    background-color: ${roots.color.PRIMARY_X_LIGHT};
     border-radius: 1rem;
     overflow: hidden;
     transition: 0.2s;
@@ -49,7 +49,7 @@ export const ImagesCover = styled.div`
     li {
       width: 100%;
       height: 100%;
-      background-color: #e8ecec21;
+      background-color: ${roots.color.PRIMARY_X_LIGHT};
 
       border-radius: 0.4rem;
       transition: 0.2s;

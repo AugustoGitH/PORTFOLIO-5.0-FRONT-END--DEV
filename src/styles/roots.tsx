@@ -2,10 +2,12 @@ const roots = {
   color: {
     PRIMARY: '#201c1c',
     PRIMARY_LIGHT: 'rgb(43, 37, 37)',
+    PRIMARY_X_LIGHT: "rgb(68, 67, 67)",
     ALERT: '#e9b95b',
     LIGTH: '#e8ecec',
-    DARK: '#000000',
-    DARK_LIGHT: '#000000a5'
+    DARK: '#0c0c0c',
+    DARK_LIGHT: '#080808',
+
   },
   font: {
     size: {

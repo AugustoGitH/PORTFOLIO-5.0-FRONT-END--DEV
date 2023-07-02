@@ -5,6 +5,7 @@ export const Home = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   padding: 2rem 0;
   background-color: ${roots.color.PRIMARY};
   @media (max-width: ${roots.screens.XLG}) {

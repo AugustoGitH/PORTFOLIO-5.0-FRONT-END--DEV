@@ -1,3 +1,4 @@
+import AlertCookies from "@/components/alerts/AlertCookies"
 import Header from "@/patterns/layout/Header"
 
 import Head from "next/head"
@@ -19,6 +20,7 @@ const Home = (): JSX.Element => {
           <Portfolio />
         </div>
       </S.Home>
+      <AlertCookies />
     </>
   )
 }

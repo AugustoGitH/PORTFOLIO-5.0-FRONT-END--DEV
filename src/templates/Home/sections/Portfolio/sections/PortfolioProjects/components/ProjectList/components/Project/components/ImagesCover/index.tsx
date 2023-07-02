@@ -55,7 +55,7 @@ const ImagesCover = ({ cover, images }: IImagesCoverProps): JSX.Element => {
   };
 
   return (
-    <S.ImagesCover>
+    <>
       <ImagesViewScreen
         viewScreen={viewScreen}
         images={[cover, ...(images ?? [])]}
@@ -63,21 +63,23 @@ const ImagesCover = ({ cover, images }: IImagesCoverProps): JSX.Element => {
           setViewScreen((prevViewS) => ({ ...prevViewS, show: false }));
         }}
       />
-      <div
-        className="cover"
-        onClick={() => {
-          handleOpenViewScreen(cover);
-        }}
-      >
-        <Image
-          src={cover}
-          alt={`image ${cover[cover.length - 1]}`}
-          width={300}
-          height={200}
-        />
-      </div>
-      <ul className="images-project">{createImagesProject()}</ul>
-    </S.ImagesCover>
+      <S.ImagesCover>
+        <div
+          className="cover"
+          onClick={() => {
+            handleOpenViewScreen(cover);
+          }}
+        >
+          <Image
+            src={cover}
+            alt={`image ${cover[cover.length - 1]}`}
+            width={300}
+            height={200}
+          />
+        </div>
+        <ul className="images-project">{createImagesProject()}</ul>
+      </S.ImagesCover>
+    </>
   );
 };
 

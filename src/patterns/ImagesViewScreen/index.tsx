@@ -61,14 +61,20 @@ const ImagesViewScreen = ({
         <button className="button-close" onClick={onClose}>
           <i className="bx bx-x"></i>
         </button>
-        <ul className="view-display-statistics"></ul>
         <div className="image-cover">
           <Image
+            key={focusImage}
             alt="Image do projeto focada"
             src={focusImage}
             width={400}
             height={300}
           />
+          {
+            focusImage === viewScreen.mainImage && (
+              <S.MarkCover><i className='bx bxs-bookmark-alt'></i></S.MarkCover>
+            )
+          }
+
         </div>
         {notFocused.length > 0 && (
           <ul className="images-list">
@@ -79,6 +85,11 @@ const ImagesViewScreen = ({
                   handleFocusImage(img);
                 }}
               >
+                {/* {
+                  img === viewScreen.mainImage && (
+                    <S.MarkCover><i className='bx bxs-bookmark-alt'></i></S.MarkCover>
+                  )
+                } */}
                 <Image
                   alt={`imagem secundaria ${index}`}
                   src={img}

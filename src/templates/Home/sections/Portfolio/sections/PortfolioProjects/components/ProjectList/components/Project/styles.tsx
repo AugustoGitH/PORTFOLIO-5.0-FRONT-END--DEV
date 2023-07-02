@@ -2,7 +2,13 @@ import { presenceAnimation } from '@/animation/presence';
 import roots from '@/styles/roots';
 import { styled } from 'styled-components';
 
-export const Project = styled.li`
+
+interface IProjectProps {
+  order: number
+}
+
+
+export const Project = styled.li<IProjectProps>`
   flex: none;
   width: 100%;
   height: calc(230px + 3rem);
@@ -10,10 +16,15 @@ export const Project = styled.li`
   align-items: flex-start;
   justify-content: space-between;
   padding-bottom: 3rem;
-  ${presenceAnimation({
-    animation: 'translateRight',
-    duration: 0.3
-  })};
+  gap: 1.5rem;
+  overflow: hidden;
+  ${({ order }) => presenceAnimation({
+  animation: 'translateRight',
+  duration: .6,
+  delay: order / 10,
+  fillMode: "backwards",
+  timingFunction: "ease"
+})}
   @media (max-width: ${roots.screens.XXLG}) {
     flex-direction: column;
     height: calc(550px + 3rem);
@@ -32,11 +43,11 @@ export const Project = styled.li`
 export const Description = styled.div`
   width: calc(100% - 300px);
   height: 100%;
-  padding-left: 1.5rem;
   position: relative;
   @media (max-width: ${roots.screens.XXLG}) {
     width: 100%;
     height: 40%;
+    padding-left: 2rem;
   }
   @media (max-width: ${roots.screens.XLG}) {
     height: 30%;
@@ -61,22 +72,18 @@ export const Description = styled.div`
     cursor: default;
     gap: 0.4rem;
     li {
-      background-color: rgb(68, 67, 67);
-      padding: 0.3rem;
+      background-color: ${roots.color.PRIMARY_X_LIGHT};
+      padding: 0.3rem .6rem;
       font-size: ${roots.font.size.XXSM};
       border-radius: 0.3rem;
       color: rgba(255, 255, 255, 0.795);
     }
   }
   h4 {
-    font-size: ${roots.font.size.SM};
+    font-size: ${roots.font.size.XSM};
     line-height: ${roots.font.line_heigth.SM};
     color: ${roots.color.ALERT};
     text-transform: capitalize;
-    @media (max-width: ${roots.screens.XXSM}) {
-      font-size: calc(${roots.font.size.SM} - 0.2rem);
-      line-height: calc(${roots.font.line_heigth.SM} - 0.2rem);
-    }
   }
   h2 {
     text-transform: capitalize;
@@ -89,10 +96,11 @@ export const Description = styled.div`
   }
   nav {
     margin-top: 0.9rem;
+    display: flex;
+    gap: 1rem;
     a {
       all: unset;
       cursor: pointer;
-      margin-right: 1rem;
       color: rgba(255, 255, 255, 0.788);
       display: inline-flex;
       align-items: center;
@@ -118,22 +126,21 @@ export const Description = styled.div`
       }
       &:hover::after {
         width: 100%;
-        background-color: var(--color-light);
+        background-color: ${roots.color.LIGTH};
       }
       &:hover {
-        color: var(--color-light);
+        color: ${roots.color.LIGTH}
       }
     }
   }
   .statistics {
-    width: 100%;
     position: absolute;
     bottom: 0;
     right: 0;
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    .button-like {
+    .button-like, .button-percent-techs {
       cursor: pointer;
       transition: 0.3s;
       position: relative;
@@ -148,7 +155,6 @@ export const Description = styled.div`
         }
       }
       &::after {
-        content: 'Curtir projeto';
         position: absolute;
         background-color: ${roots.color.DARK};
         width: 80px;
@@ -164,6 +170,20 @@ export const Description = styled.div`
         transition: 0.2s;
       }
     }
+    .button-like{
+      &::after{
+        content: 'Curtir projeto';
+      } 
+    }
+    .button-percent-techs{
+      &::after{
+        content: 'Estátisticas';
+        @media (max-width: ${roots.screens.XSM}) {
+          content: '';
+          display: none;
+        }
+      }
+    } 
     .liked {
       background-color: ${roots.color.ALERT};
       i {
@@ -188,8 +208,8 @@ export const Description = styled.div`
     }
 
     li {
-      font-size: ${roots.font.size.XSM};
-      background: rgb(58, 57, 57);
+      font-size: calc(${roots.font.size.XSM} - .1rem);
+      background: ${roots.color.PRIMARY_X_LIGHT};
       padding: 0.2rem 0.7rem;
       color: #d0d0d0;
       cursor: default;

@@ -16,27 +16,28 @@ const getProjects = async (): Promise<IServiceGetProjects> => {
         withCredentials: true
       }
     );
-    console.log(data);
     return {
       message: data.message,
       projects: data.projects,
       projectsSought: true
     };
   } catch (error: unknown) {
-    if (error instanceof AxiosError) {
-      return {
-        message:
-          error.response?.data?.message ??
-          constants.GENERIC_ERROR_MESSAGE_GET_PROJECTS,
-        projects: null,
-        projectsSought: false
-      };
-    }
-    return {
-      message: constants.GENERIC_ERROR_MESSAGE_GET_PROJECTS,
-      projects: null,
-      projectsSought: false
-    };
+    console.error(error);
+    throw new Error(constants.GENERIC_ERROR_MESSAGE_GET_PROJECTS);
+    // if (error instanceof AxiosError) {
+    //   return {
+    //     message:
+    //       error.response?.data?.message ??
+    //       constants.GENERIC_ERROR_MESSAGE_GET_PROJECTS,
+    //     projects: null,
+    //     projectsSought: false
+    //   };
+    // }
+    // return {
+    //   message: constants.GENERIC_ERROR_MESSAGE_GET_PROJECTS,
+    //   projects: null,
+    //   projectsSought: false
+    // };
   }
 };
 

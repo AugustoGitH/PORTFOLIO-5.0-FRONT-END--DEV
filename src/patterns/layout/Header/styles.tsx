@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 
 export const Header = styled.header`
   background-color: ${roots.color.PRIMARY};
-  padding: 0 ${roots.layout.PADDING_HORIZONTAL_CONTAINER};
+  padding: 0 4rem;
   display: flex;
   height: 60px;
   justify-content: center;
@@ -11,6 +11,9 @@ export const Header = styled.header`
   position: sticky;
   top: 0;
   z-index: ${roots.orders.SUP};
+  @media (max-width:  ${roots.screens.XSM}) {
+    padding: 0 ${roots.layout.PADDING_HORIZONTAL_CONTAINER};
+  }
   .content {
     width: ${roots.layout.MAX_WIDTH_CONTENT};
     display: flex;
@@ -25,6 +28,7 @@ export const Header = styled.header`
         cursor: pointer;
         position: relative;
         text-transform: uppercase;
+        line-height: calc(${roots.font.line_heigth.SM} - .3rem);
         &::before {
           content: '';
           position: absolute;
@@ -78,15 +82,14 @@ export const Header = styled.header`
           position: absolute;
           width: 70px;
           font-size: ${roots.font.size.XXSM};
-          background-color: var(--color-dark);
+          background-color: ${roots.color.DARK};
           color: ${roots.color.LIGTH};
           padding: 0.3rem;
           text-align: center;
           z-index: ${roots.orders.SUP};
           border-radius: 0.3rem;
           bottom: -1.8rem;
-          right: 0rem;
-          transform: translateX(20px);
+          transform: translateY(-20px);
           opacity: 0;
           transition: 0.2s;
         }
