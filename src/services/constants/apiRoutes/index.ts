@@ -22,7 +22,7 @@ const apiRoutes = {
       '/project/private/',
       {
         GET_PROJECTS: '/get-projects',
-        GET_REPOSITORIES: '/get-repos  ',
+        GET_REPOSITORIES: '/get-repositories',
         DELETE_PROJECT: '/delete-project',
         CREATE_PROJECT: '/create-project',
         RELOAD_REPO_PROJECT: '/reload-repo-project',

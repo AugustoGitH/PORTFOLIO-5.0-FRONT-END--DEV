@@ -1,11 +1,11 @@
-import * as zod from 'zod';
+import * as z from 'zod';
 
-export const schemaLogin = zod.object({
-  name: zod
+export const schemaLogin = z.object({
+  name: z
     .string()
     .nonempty('O nome é obrigatório!')
     .min(10, 'É necessário que tenha no mínimo 10 caracteres.'),
-  password: zod
+  password: z
     .string()
     .nonempty('A senha é obrigatório!')
     .regex(

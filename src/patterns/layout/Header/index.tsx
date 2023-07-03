@@ -8,30 +8,50 @@ import { type IHeaderProps } from "./types"
 
 
 
-const Header = ({ painel = false, home = true }: IHeaderProps): JSX.Element => {
+const Header = ({ mode = "home" }: IHeaderProps): JSX.Element => {
   return (
     <S.Header>
       <div className="content">
         <Link href="/" title="Volte para a home"><h1>Augusto Westphal</h1></Link>
         <nav>
-          <a
-            className="button-curriculum"
-            target="_blank"
-            title="Faça download do meu CV"
-            href={ancors.others.CV} rel="noreferrer"
-          ><i className='bx bxs-receipt' /></a>
-          <a
-            className="button-github"
-            target="_blank"
-            title="Acesse o meu GitHub"
-            href={ancors.networks.GITHUB} rel="noreferrer"
-          ><i className='bx bxl-github' /></a>
-          <a
-            className="button-linkedin"
-            target="_blank"
-            title="Acesse o meu Linkedin"
-            href={ancors.networks.LINKEDIN} rel="noreferrer"
-          ><i className='bx bxl-linkedin-square' /></a>
+          {
+            mode === "home" && (
+              <>
+                <a
+                  className="button-curriculum"
+                  target="_blank"
+                  title="Faça download do meu CV"
+                  href={ancors.others.CV} rel="noreferrer"
+                ><i className='bx bxs-receipt' /></a>
+                <a
+                  className="button-github"
+                  target="_blank"
+                  title="Acesse o meu GitHub"
+                  href={ancors.networks.GITHUB} rel="noreferrer"
+                ><i className='bx bxl-github' /></a>
+                <a
+                  className="button-linkedin"
+                  target="_blank"
+                  title="Acesse o meu Linkedin"
+                  href={ancors.networks.LINKEDIN} rel="noreferrer"
+                ><i className='bx bxl-linkedin-square' /></a>
+              </>
+            )
+          }
+          {
+            mode === "painel" && (
+              <>
+                <Link
+                  className="button-back"
+                  title="Voltar para o início"
+                  href="/"
+                ><i className='bx bxs-home'></i></Link>
+                <button className="button-logout" title="Fazer logout">
+                  <i className='bx bxs-log-out-circle'></i>
+                </button>
+              </>
+            )
+          }
         </nav>
       </div>
     </S.Header >

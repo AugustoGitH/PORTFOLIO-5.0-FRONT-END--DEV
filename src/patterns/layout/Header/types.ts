@@ -1,4 +1,3 @@
 export interface IHeaderProps {
-  painel?: boolean;
-  home?: boolean;
+  mode?: 'home' | 'painel';
 }

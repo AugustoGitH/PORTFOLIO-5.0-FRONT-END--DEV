@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useRouter } from 'next/router';
 
-import { type IRegisterForm, type IUseFormLogin } from './types';
+import { type IUseFormLogin } from './types';
 
 const useLogin = (): IUseFormLogin => {
   const {
@@ -32,7 +32,7 @@ const useLogin = (): IUseFormLogin => {
     }
   };
 
-  const registerForm: IRegisterForm = {
+  const registerForm = {
     onSubmit: handleSubmit(onSubmit)
   };
 

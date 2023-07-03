@@ -70,7 +70,9 @@ export const Header = styled.header`
 
       .button-github,
       .button-linkedin,
-      .button-curriculum {
+      .button-curriculum,
+      .button-back,
+      .button-logout {
         &:hover {
           &::after {
             opacity: 1;
@@ -97,8 +99,15 @@ export const Header = styled.header`
       .button-github::after {
         content: 'Meu GitHub';
       }
+      .button-back::after{
+        content: "Voltar";
+        width: 40px;
+      }
       .button-linkedin::after {
         content: 'Meu Linkedin';
+      }
+      .button-logout::after {
+        content: 'Fazer Logout';
       }
       .button-curriculum::after {
         content: 'Baixar Currículo';
