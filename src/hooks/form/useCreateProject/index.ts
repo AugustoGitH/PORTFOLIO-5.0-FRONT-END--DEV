@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
 import schemaCreateProject from '@/schemas/form/createProject';
@@ -15,6 +15,7 @@ const useCreateProject = (): IUseFormCreateProject => {
     register: registerInput,
     handleSubmit,
     control,
+    watch,
     formState: { errors }
   } = useForm<IFormCreateProject>({
     resolver: zodResolver(schemaCreateProject)
@@ -28,21 +29,10 @@ const useCreateProject = (): IUseFormCreateProject => {
     onSubmit: handleSubmit(onSubmit)
   };
 
+  const inputsWatches = watch();
+
   // const [isCreatingProject, setIsCreatingProject] = useState(false);
   // const [isReset, setIsReset] = useState(false);
-  // const [infInputsBlockRepo, setInfInputsBlockRepo] =
-  //   useState<IInfInputsBlockRepo>({
-  //     repoLink: false,
-  //     repoId: false
-  //   });
-
-  // useEffect(() => {
-  //   const { repoLink, repoId } = project;
-  //   setInfInputsBlockRepo({
-  //     repoLink: Boolean(repoLink),
-  //     repoId: Boolean(repoId)
-  //   });
-  // }, [project]);
 
   // const handleChangeAttrProject = (
   //   key: keyof IFormCreateProject,
@@ -74,7 +64,7 @@ const useCreateProject = (): IUseFormCreateProject => {
   // });
   // };
 
-  return { registerInput, registerForm, errors, control };
+  return { registerInput, registerForm, errors, control, inputsWatches };
 };
 
 export default useCreateProject;

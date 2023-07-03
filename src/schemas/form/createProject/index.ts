@@ -10,38 +10,67 @@ import { whiteListTechsUsedProject, whiteListTypesProject } from '../settings';
 const schemaCreateProject = z.object({
   name: z
     .string()
-    .nonempty()
-    .min(4, 'O nome pode ter no minimo 4 caracteres.')
-    .max(47, 'O nome pode ter no maximo 47 caracteres.'),
+    .nonempty('O nome é obrigatório!')
+    .min(4, 'O nome pode ter no mínimo 4 caracteres.')
+    .max(47, 'O nome pode ter no máximo 47 caracteres.'),
+
   type: z
     .string()
-    .nonempty()
-    .refine(
-      (type: string) => whiteListTypesProject.includes(type as TProjectType),
-      {
-        message: 'O tipo selecionado é inválido!'
-      }
-    ),
+    .nonempty('O tipo é obrigatório!')
+    .refine((type) => whiteListTypesProject.includes(type as TProjectType), {
+      message: 'O tipo selecionado é inválido!'
+    })
+    .default(''),
+
   technologiesUsed: z
     .array(z.string())
-    .nonempty()
-    .min(2)
+    .nonempty('Tecnologias mais usadas é obrigatório!')
+    .min(2, 'É necessário selecionar ao menos duas tecnologias.')
     .refine((techsSelected) =>
-      techsSelected.every((tech: string) =>
+      techsSelected.every((tech) =>
         whiteListTechsUsedProject.includes(tech as TProjectTechnologiesUsed)
       )
-    ),
+    )
+    .default(['']),
+
   websiteLink: z
     .string()
-    .regex(regex.REGEX_URL_WEBSITE, 'Url inválida!')
-    .default(''),
-  videoLink: z.string().regex(regex.REGEX_URL_YOUTUBE).default(''),
-  repoId: z.number().min(5),
+    .refine((value) => value === '' || regex.REGEX_URL_WEBSITE.test(value), {
+      message: 'URL inválida!'
+    })
+    .default('')
+    .optional(),
+
+  videoLink: z
+    .string()
+    .refine((value) => value === '' || regex.REGEX_URL_YOUTUBE.test(value), {
+      message: 'URL inválida!'
+    })
+    .default('')
+    .optional(),
+
+  repoId: z
+    .number()
+    .refine((value) => !isNaN(Number(value)), {
+      message: 'É necessário que o ID seja um número!'
+    })
+    .nullable()
+    .optional(),
+
   images: z.object({
-    cover: z.string().nonempty(),
+    cover: z.string().nonempty('É necessário selecionar a capa do projeto!'),
     images: z.array(z.string())
   }),
-  repoLink: z.string().regex(regex.REGEX_URL_REPO_GITHUB).default('')
-});
 
+  repoLink: z
+    .string()
+    .refine(
+      (value) => value === '' || regex.REGEX_URL_REPO_GITHUB.test(value),
+      {
+        message: 'URL inválida!'
+      }
+    )
+    .default('')
+    .optional()
+});
 export default schemaCreateProject;

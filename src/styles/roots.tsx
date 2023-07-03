@@ -7,6 +7,7 @@ const roots = {
     LIGTH: '#e8ecec',
     DARK: '#0c0c0c',
     DARK_LIGHT: '#080808',
+    DANGER: "red"
 
   },
   font: {

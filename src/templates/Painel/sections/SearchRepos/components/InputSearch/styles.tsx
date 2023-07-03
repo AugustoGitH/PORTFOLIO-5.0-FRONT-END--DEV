@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 
 export const InputSearch = styled.div`
-margin-top: 2rem;
+margin-top: 3rem;
   width: 400px;
   line-height: .5rem;
   @media (max-width: ${roots.screens.XSM}) {
@@ -13,6 +13,7 @@ margin-top: 2rem;
     color: #ffffffd3;
     font-size:  ${roots.font.size.SM};
     color:  ${roots.color.ALERT};
+    font-weight: bold;
   }
   input{
     width: 100%;

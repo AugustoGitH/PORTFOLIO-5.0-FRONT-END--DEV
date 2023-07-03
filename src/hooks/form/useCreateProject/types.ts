@@ -16,6 +16,7 @@ export interface IUseFormCreateProject {
   registerInput: UseFormRegister<IFormCreateProject>;
   errors: FieldErrors<IFormCreateProject>;
   control: Control<IFormCreateProject>;
+  inputsWatches: IFormCreateProject;
 }
 
 export interface IRegisterForm {

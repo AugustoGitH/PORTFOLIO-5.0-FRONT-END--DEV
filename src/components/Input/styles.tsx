@@ -1,14 +1,21 @@
+import { presenceAnimation } from "@/animation/presence";
 import roots from "@/styles/roots";
 import { styled } from "styled-components";
 
 
-export const InputDefault = styled.div`
-  position: relative;
+interface IInputProps {
+  error: boolean
+}
+
+export const Input = styled.div<IInputProps>`
   width: 500px;
   @media (max-width: ${roots.screens.MD}) {
     width: 100%;
   }
-  input {
+  .input-content{
+    width: 100%;
+    position: relative;
+    input {
     position: relative;
     width: 100%;
     padding: 20px 10px 10px;
@@ -26,18 +33,19 @@ export const InputDefault = styled.div`
 
   span {
     position: absolute;
-    left: 0;
+    left: .2rem;
     padding: 20px 10px 10px;
     font-size: ${roots.font.size.SM};
-    color: #8f8f8f;
+    color: ${({ error }) => error ? roots.color.DANGER : "#8f8f8f"}; 
     letter-spacing: 00.05em;
     transition: 0.5s;
     pointer-events: none;
+    font-weight: bold;
   }
 
   input:valid ~ span,
   input:focus ~ span {
-    color: ${roots.color.ALERT};
+    color: ${({ error }) => error ? roots.color.DANGER : roots.color.ALERT};
     transform: translateX(-12px) translateY(-36px);
     font-size: ${roots.font.size.XSM};
   }
@@ -48,7 +56,7 @@ export const InputDefault = styled.div`
     bottom: 0;
     width: 100%;
     height: 2px;
-    background: var(--color-yellow);
+    background: ${({ error }) => error ? roots.color.DANGER : roots.color.ALERT};
     border-radius: 4px;
     transition: 0.5s;
     pointer-events: none;
@@ -58,6 +66,18 @@ export const InputDefault = styled.div`
   input:valid ~ i,
   input:focus ~ i {
     height: 44px;
-    background-color: ${roots.color.LIGTH};
+    background-color: ${({ error }) => error ? roots.color.DANGER : roots.color.LIGTH};
+  }
+  }
+  .helper-text{
+    font-size: ${roots.font.size.XXSM};
+    color: ${roots.color.DANGER};
+    text-transform: uppercase;
+    font-weight: bold;
+    ${presenceAnimation({
+  animation: "opacity",
+  duration: .3
+})
+  }
   }
 `

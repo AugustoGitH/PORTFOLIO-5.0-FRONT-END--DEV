@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react"
 
+import Input from "@/components/Input"
 import useSearchReposStore from "@/stores/project/private/useSearchRepos"
 import { type IRepository } from "@/types/repository"
 
-import InputDefault from "../InputDefault"
+
 import * as S from "./styles"
 import { type IInputSelectIdRepoProps } from "./types"
 
-const InputSelectIdRepo = ({ onChange, reset = false, disabled = false }: IInputSelectIdRepoProps): JSX.Element => {
+const InputSelectIdRepo = ({ onChange, reset = false, error = false, helperText, disabled = false }: IInputSelectIdRepoProps): JSX.Element => {
   const repositories = useSearchReposStore(state => state.repos)
   const [reposFocus, setReposFocus] = useState<IRepository[]>([])
   const [showOptions, setShowOptions] = useState(false)
@@ -71,11 +72,13 @@ const InputSelectIdRepo = ({ onChange, reset = false, disabled = false }: IInput
 
   return (
     <S.InputSelectIdRepo disabled={disabled} ref={refSelected}>
-      <InputDefault
+      <Input
         label="Digite o nome do repositório"
         onFocus={() => { setShowOptions(true); }}
         onClick={() => { setShowOptions(true); }}
         value={nameRepo}
+        error={error}
+        helperText={helperText}
         onChange={(e) => { handleChangeInputSearh(e.target.value) }}
       />
       {idSelected && (<span className="id-repo">{idSelected}</span>)}

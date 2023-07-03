@@ -38,8 +38,8 @@ export const InputSelectIdRepo = styled.div<IInputSelectIdRepoProps>`
     position: absolute;
     z-index: ${roots.orders.XSUB};
     ${presenceAnimation({
-  animation: "translateDown",
-  duration: .3
+  animation: "translateUp",
+  duration: .4
 })}
     .results-search-repositories {
       margin-top: 1rem;
