@@ -6,7 +6,7 @@ const roots = {
     ALERT: '#e9b95b',
     LIGTH: '#e8ecec',
     DARK: '#0c0c0c',
-    DARK_LIGHT: '#080808',
+    DARK_LIGHT: '#636565',
     DANGER: "red"
 
   },
@@ -15,7 +15,7 @@ const roots = {
       XXSM: '0.6rem',
       XSM: '0.8rem',
       SM: '1rem',
-      MD: '1.4rem',
+      MD: '1.5rem',
       LG: '1.8rem',
       XLG: '2.1rem',
       XXLG: '3.1rem'
@@ -24,7 +24,7 @@ const roots = {
       XXSM: '1rem',
       XSM: '1.2rem',
       SM: '1.4rem',
-      MD: '1.8rem',
+      MD: '1.9rem',
       LG: '2.2rem',
       XLG: '2.5rem',
       XXLG: '3.5rem'

@@ -44,7 +44,7 @@ export const AboutDescription = styled.article`
   margin-top: 2rem;
   width: 100%;
   h1 {
-    font-size: ${roots.font.size.MD};
+    font-size: calc(${roots.font.size.MD});
     line-height: ${roots.font.size.MD};
   }
   h3 {

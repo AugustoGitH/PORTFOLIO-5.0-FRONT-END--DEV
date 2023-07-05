@@ -67,8 +67,7 @@ export const BarPercentage = styled.li<IBarPercentageProps>`
       height: 30px;
       border-radius: 50%;
       color: ${roots.color.LIGTH};
-      font-size: 0.8rem;
-      letter-spacing: -0.06rem;
+      font-size: 1rem;
       position: relative;
       cursor: default;
       &::after {
@@ -130,6 +129,16 @@ export const BarPercentage = styled.li<IBarPercentageProps>`
           border-radius: 0.3rem;
           top: -1.3rem;
           right: -1rem;
+          &::after{
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            bottom: -.1rem;
+            left: 0.1rem;
+            transform: rotate(50deg);
+            background-color: ${roots.color.DARK};
+          }
         }
       }
     }

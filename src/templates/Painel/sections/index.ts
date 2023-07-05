@@ -1,6 +1,6 @@
 import DashboardSection from './Dashboard';
-import ManageProjectsSection from './FormCreateProject';
-import FormCreateProjectSection from './ManageProjects';
+import FormCreateProjectSection from './FormCreateProject';
+import ManageProjectsSection from './ManageProjects';
 import SearchReposSection from './SearchRepos';
 
 export {

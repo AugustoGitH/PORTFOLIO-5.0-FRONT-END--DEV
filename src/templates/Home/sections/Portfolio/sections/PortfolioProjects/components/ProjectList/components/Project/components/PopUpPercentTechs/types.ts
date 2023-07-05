@@ -6,6 +6,7 @@ export interface IBarTechnologieProps {
   percent: number;
   order: number;
   listIcons: ITechIcon[];
+  idProject: string;
 }
 
 export interface IPopUpPercentTechsProps {
@@ -13,4 +14,5 @@ export interface IPopUpPercentTechsProps {
   show: boolean;
   technologies: string[];
   onClose: () => void;
+  idProject: string;
 }

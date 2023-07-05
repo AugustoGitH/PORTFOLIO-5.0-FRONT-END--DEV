@@ -19,6 +19,7 @@ export interface ICheckboxesProps {
   value?: string | string[];
   error?: boolean;
   helperText?: string;
+  reset?: boolean;
 }
 
 export interface ICheckboxProps {

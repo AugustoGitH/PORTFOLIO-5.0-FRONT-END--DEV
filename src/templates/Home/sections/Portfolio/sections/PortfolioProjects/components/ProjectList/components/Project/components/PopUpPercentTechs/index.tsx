@@ -7,9 +7,9 @@ import * as S from "./styles"
 import { type IPopUpPercentTechsProps, type IBarTechnologieProps } from "./types"
 
 
-const BarTechnologie = ({ tech, percent, order, listIcons }: IBarTechnologieProps): JSX.Element => {
+const BarTechnologie = ({ tech, percent, order, idProject, listIcons }: IBarTechnologieProps): JSX.Element => {
   return (
-    <S.BarTechnologie order={order} percent={percent} tech={tech}>
+    <S.BarTechnologie order={order} percent={percent} tech={tech} id={idProject}>
       <div className="icon-tech">
         {listIcons.find((techList) => techList.tech === tech)?.icon}
       </div>
@@ -23,7 +23,7 @@ const BarTechnologie = ({ tech, percent, order, listIcons }: IBarTechnologieProp
 }
 
 
-const PopUpPercentTechs = ({ percents, technologies, show, onClose }: IPopUpPercentTechsProps): JSX.Element => {
+const PopUpPercentTechs = ({ percents, idProject, technologies, show, onClose }: IPopUpPercentTechsProps): JSX.Element => {
   const tratedPercentsDecimalToPercentage = treatingTechsToShowPercentage(percents, technologies)
 
 
@@ -36,13 +36,24 @@ const PopUpPercentTechs = ({ percents, technologies, show, onClose }: IPopUpPerc
               <ul className="statistic-percentages-techs">
                 {
                   Object.entries(tratedPercentsDecimalToPercentage).map(([tech, percent], index) => (
-                    <BarTechnologie key={`${tech}-percentage`} tech={tech} listIcons={techsWhiteListIcon} order={index} percent={percent} />
+                    <BarTechnologie
+                      key={`${tech}-percentage`}
+                      idProject={idProject}
+                      tech={tech}
+                      listIcons={techsWhiteListIcon}
+                      order={index}
+                      percent={percent}
+                    />
                   ))
                 }
               </ul>
             </>
           ) : (
-            <span className="message-not-percent-techs">Este projeto não há indices de tecnologias mais usadas</span>
+            <div className="message-not-percent-techs">
+              <span><i className='bx bxs-inbox'></i>Este projeto não há indices de tecnologias mais usadas</span>
+            </div>
+
+
           )
         }
         <button className="btn-close" onClick={onClose}><i className='bx bx-x' ></i></button>

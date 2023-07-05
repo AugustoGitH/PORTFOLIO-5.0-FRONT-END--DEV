@@ -28,7 +28,7 @@ const Checkbox = ({ option, error, ...rest }: ICheckboxProps): JSX.Element => {
 
 
 
-const Checkboxes = ({ options, label, name, tagAnyone, onChange, value, error = false, helperText }: ICheckboxesProps): JSX.Element => {
+const Checkboxes = ({ options, label, name, tagAnyone, onChange, value, reset, error = false, helperText }: ICheckboxesProps): JSX.Element => {
   const [selectedValues, setSelectedValues] = useState<string[]>(
     value ? Array.isArray(value) ? value : [value] : []
   )
@@ -58,6 +58,11 @@ const Checkboxes = ({ options, label, name, tagAnyone, onChange, value, error = 
 
   }
 
+  useEffect(() => {
+    if (reset) {
+      setSelectedValues([])
+    }
+  }, [reset])
 
   useEffect(() => {
     if (value !== undefined) {

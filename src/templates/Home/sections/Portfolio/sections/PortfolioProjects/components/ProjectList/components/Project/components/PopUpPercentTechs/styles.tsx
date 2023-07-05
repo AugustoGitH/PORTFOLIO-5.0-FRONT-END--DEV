@@ -27,6 +27,35 @@ export const PopUpPercentTechs = styled.div`
   animation: 'translateDown',
   duration: 0.4
 })}
+.message-not-percent-techs{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${presenceAnimation({
+  animation: 'scale',
+  duration: 0.4
+})}
+  span{
+    max-width: 300px;
+    font-size: ${roots.font.size.XSM};
+    background: #d3d3d314;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem 1rem;
+    gap: 1rem;
+    border-radius: .6rem;
+    color: #ffffffca;
+    line-height: 1rem;
+    border: 1.2px solid #ffffff15;
+    i{
+      font-size: 1.2rem;
+      color: ${roots.color.ALERT}
+    }
+  }
+}
     .btn-close {
     all: unset;
     width: 20px;
@@ -55,7 +84,7 @@ export const PopUpPercentTechs = styled.div`
     gap: 0.4rem;
     overflow: auto;
     height: 100%;
-    padding: 1rem .6rem 0 0;
+    padding: 1rem 1rem 0 0;
   }
   }
 `;
@@ -63,7 +92,8 @@ export const PopUpPercentTechs = styled.div`
 interface IBarTechnologieProps {
   order: number;
   percent: number;
-  tech: string
+  tech: string,
+  id: string
 }
 
 export const BarTechnologie = styled.li<IBarTechnologieProps>`
@@ -83,7 +113,6 @@ export const BarTechnologie = styled.li<IBarTechnologieProps>`
     color: ${roots.color.DARK};
     font-size: 0.8rem;
     font-weight: bold;
-    letter-spacing: -0.06rem;
     position: relative;
     cursor: default;
     &::after{
@@ -123,12 +152,12 @@ export const BarTechnologie = styled.li<IBarTechnologieProps>`
       background-color: ${roots.color.LIGTH};
       position: relative;
       width: 0%;
-      ${({ percent, order, tech }) => `
-      @keyframes progress-${tech} {
+      ${({ percent, order, tech, id }) => `
+      @keyframes progress-${tech}-${id} {
         0%{ width: 0% }
         100%{ width: ${percent}% }
       }
-      animation-name: progress-${tech};
+      animation-name: progress-${tech}-${id};
       animation-fill-mode: forwards;
       animation-duration: 1s;
       animation-delay: ${order / 3}s;
@@ -145,12 +174,12 @@ export const BarTechnologie = styled.li<IBarTechnologieProps>`
         border-radius: 0.3rem;
         &::after{
           content: "";
-          width: 5px;
-          height: 5px;
+          width: 6px;
+          height: 6px;
           background: ${roots.color.DARK};
           position: absolute;
-          bottom: -.08rem;
-          left: .2rem;
+          bottom: -.09rem;
+          left: .16rem;
           transform: rotate(50deg)
         }
       }

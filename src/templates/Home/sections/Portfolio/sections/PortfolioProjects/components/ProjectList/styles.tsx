@@ -49,7 +49,7 @@ export const HelperText = styled.div`
   span{
     display: inline-flex;
     align-items: center;
-    gap: .5rem;
+    gap: 1rem;
     background-color: ${roots.color.PRIMARY_X_LIGHT};
     padding: .7rem 1rem;
     border-radius: .6rem;
@@ -65,7 +65,7 @@ export const HelperText = styled.div`
   duration: .3
 })}
 i{
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: ${roots.color.ALERT}
 }
   }

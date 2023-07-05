@@ -6,8 +6,9 @@ export interface IUseProject {
   wasLiked: boolean;
   statesShowPercentageTechs: IStatesShowPercentageTechs;
   handleOpenPercentTechs: () => void;
-  viewProject: () => void;
-  likeProject: () => void;
+  viewProject: () => Promise<void>;
+  likeProject: () => Promise<void>;
+  lodingLike: boolean;
   editStatesShowPercentageTechs: (
     statesPercentage: (
       prevStates: IStatesShowPercentageTechs

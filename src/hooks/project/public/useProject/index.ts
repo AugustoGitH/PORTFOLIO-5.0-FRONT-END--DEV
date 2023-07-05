@@ -1,14 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import useLocalStorage from '@/hooks/useLocalStorage';
+import likeProjectService from '@/services/authLevel/public/likeProject';
+import viewProjectService from '@/services/authLevel/public/viewProject';
 import useProjectsStore from '@/stores/project/public/useProjects';
 import { type IProjectPublic } from '@/types/Project';
 
 import { type IUseProject } from './types';
 
 const useProject = (project: IProjectPublic): IUseProject => {
+  const likedProjects: string[] = JSON.parse(
+    localStorage.getItem('projects-liked') ?? '[]'
+  );
+
   const [likes, setLikes] = useState(project.likes);
   const [views, setViews] = useState(project.views);
+  const [lodingLike, setLoadingLike] = useState(false);
 
   const [editStatesShowPercentageTechs, statesShowPercentageTechs] =
     useProjectsStore((state) => [
@@ -16,28 +22,37 @@ const useProject = (project: IProjectPublic): IUseProject => {
       state.statesShowPercentageTechs
     ]);
 
-  const [projectsLiked, setProjectsLiked] = useLocalStorage<string[]>(
-    'projects-liked',
-    []
-  );
+  const [wasLiked, setWasLiked] = useState(likedProjects.includes(project._id));
 
-  const [wasLiked, setWasLiked] = useState(false);
-
-  useEffect(() => {
-    setWasLiked(projectsLiked.includes(project._id));
-  }, [projectsLiked, project._id]);
-
-  const viewProject = (): void => {
-    setViews((prevViews) => prevViews + 1);
+  const viewProject = async (): Promise<void> => {
+    const { visualized } = await viewProjectService(project._id);
+    setViews((prevViews) => (visualized ? prevViews + 1 : prevViews));
   };
 
-  const likeProject = (): void => {
-    if (wasLiked) {
-      setProjectsLiked(projectsLiked.filter((id) => id !== project._id));
-      setLikes((prevLikes) => prevLikes - 1);
-    } else {
-      setProjectsLiked([...projectsLiked, project._id]);
-      setLikes((prevLikes) => prevLikes + 1);
+  const likeProject = async (): Promise<void> => {
+    const likedProjects: string[] = JSON.parse(
+      localStorage.getItem('projects-liked') ?? '[]'
+    );
+    const projectIsLiked = likedProjects.includes(project._id);
+
+    setLoadingLike(true);
+    const { action } = await likeProjectService(
+      project._id,
+      projectIsLiked ? 'desfavorite' : 'favorite'
+    );
+    setLoadingLike(false);
+
+    if (action) {
+      window?.localStorage.setItem(
+        'projects-liked',
+        JSON.stringify(
+          projectIsLiked
+            ? likedProjects.filter((idLiked) => idLiked !== project._id)
+            : [...likedProjects, project._id]
+        )
+      );
+      setLikes((prevLikes) => (projectIsLiked ? prevLikes - 1 : prevLikes + 1));
+      setWasLiked(!projectIsLiked);
     }
   };
 
@@ -51,6 +66,7 @@ const useProject = (project: IProjectPublic): IUseProject => {
   };
 
   return {
+    lodingLike,
     viewProject,
     likeProject,
     likes,

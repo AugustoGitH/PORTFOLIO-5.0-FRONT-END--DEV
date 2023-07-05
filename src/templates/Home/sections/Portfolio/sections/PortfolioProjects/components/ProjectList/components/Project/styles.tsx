@@ -140,10 +140,32 @@ export const Description = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(${roots.font.size.XSM} - .1rem);
+      background: ${roots.color.PRIMARY_X_LIGHT};
+      padding: 0.2rem 0.7rem;
+      color: #d0d0d0;
+      cursor: default;
+      border-radius: 0.4rem;
+      
+      @media (max-width: ${roots.screens.XXSM}) {
+        font-size: calc(${roots.font.size.XSM} - 0.1rem);
+      }
+    }
+    .statistics-views{
+      width: 120px;
+    }
+    .statistics-likes{
+      width: 90px;
+    }
     .button-like, .button-percent-techs {
       cursor: pointer;
       transition: 0.3s;
       position: relative;
+      width: 35px;
       &:hover {
         background-color: ${roots.color.ALERT};
         i {
@@ -204,18 +226,6 @@ export const Description = styled.div`
         transform: translateY(-15px);
         opacity: 0;
         transition: 0.2s;
-      }
-    }
-
-    li {
-      font-size: calc(${roots.font.size.XSM} - .1rem);
-      background: ${roots.color.PRIMARY_X_LIGHT};
-      padding: 0.2rem 0.7rem;
-      color: #d0d0d0;
-      cursor: default;
-      border-radius: 0.4rem;
-      @media (max-width: ${roots.screens.XXSM}) {
-        font-size: calc(${roots.font.size.XSM} - 0.1rem);
       }
     }
   }

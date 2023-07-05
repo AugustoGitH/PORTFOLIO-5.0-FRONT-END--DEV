@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect, type Dispatch, type SetStateAction } from 'react';
 
-type SetValue<T> = (value: T | ((prevValue: T) => T)) => void;
-
-const useLocalStorage = <T>(key: string, initialValue: T): [T, SetValue<T>] => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+const useLocalStorage = <T>(
+  key: string,
+  initialValue: T
+): [value: T, setValue: Dispatch<SetStateAction<T>>] => {
+  const [value, setValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -12,16 +13,17 @@ const useLocalStorage = <T>(key: string, initialValue: T): [T, SetValue<T>] => {
       return initialValue;
     }
   });
+
   useEffect(() => {
     try {
-      const serializedValue = JSON.stringify(storedValue);
+      const serializedValue = JSON.stringify(value);
       window.localStorage.setItem(key, serializedValue);
     } catch (error) {
       console.error('Error saving value to localStorage:', error);
     }
-  }, [key, storedValue]);
+  }, [key, value]);
 
-  return [storedValue, setStoredValue];
+  return [value, setValue];
 };
 
 export default useLocalStorage;

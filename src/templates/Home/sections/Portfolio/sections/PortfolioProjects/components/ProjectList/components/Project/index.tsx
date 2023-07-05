@@ -1,5 +1,7 @@
 
+import LoaderDefault from '@/components/loaders/LoaderDefault';
 import useProject from '@/hooks/project/public/useProject';
+import { whiteListTechsUsedProject } from '@/schemas/form/settings';
 import ImagesCover from '@/templates/Home/sections/Portfolio/sections/PortfolioProjects/components/ProjectList/components/Project/components/ImagesCover';
 
 import PopUpPercentTechs from './components/PopUpPercentTechs';
@@ -7,7 +9,7 @@ import * as S from './styles';
 import { type IProjectProps } from './types';
 
 const Project = ({ project, order }: IProjectProps): JSX.Element => {
-  const { likeProject, viewProject, likes, views, wasLiked, editStatesShowPercentageTechs, handleOpenPercentTechs, statesShowPercentageTechs } = useProject(project)
+  const { likeProject, viewProject, likes, views, wasLiked, editStatesShowPercentageTechs, handleOpenPercentTechs, statesShowPercentageTechs, lodingLike } = useProject(project)
   return (
     <S.Project className="project" order={order}>
       <ImagesCover cover={project.images.cover} images={project.images.images} />
@@ -24,7 +26,7 @@ const Project = ({ project, order }: IProjectProps): JSX.Element => {
             <a
               href={project.websiteLink}
               target="_blank"
-              onClick={viewProject}
+              onClick={() => { void viewProject() }}
               rel="noreferrer"
             >
               Visitar
@@ -35,7 +37,7 @@ const Project = ({ project, order }: IProjectProps): JSX.Element => {
             <a
               href={project.videoLink}
               target="_blank"
-              onClick={viewProject}
+              onClick={() => { void viewProject() }}
               rel="noreferrer"
             >
               Preview
@@ -55,28 +57,25 @@ const Project = ({ project, order }: IProjectProps): JSX.Element => {
           </li>
           <li
             className={`button-like ${wasLiked ? "liked" : ""}`}
-            onClick={likeProject}
+            onClick={() => { void likeProject() }}
           >
-            <i className="bx bxs-like"></i>
+            {
+              lodingLike ? <LoaderDefault color='light' size='sm' /> : <i className="bx bxs-like"></i>
+            }
           </li>
-          <li>
+          <li className="statistics-likes">
             {likes} {`curtida${likes === 1 ? '' : 's'}`}
           </li>
-          <li>
+          <li className="statistics-views">
             {views} {`visualizaç${views === 1 ? 'ão' : 'ões'}`}
           </li>
         </ul>
         <PopUpPercentTechs
+          idProject={project._id}
           show={statesShowPercentageTechs[project._id]}
-          percents={{
-            "html": 2000,
-            "css": 3000,
-            "javascript": 300,
-            "ejs": 300,
-            "typescript": 5000
-          }}
+          percents={project.repositoryTechnologiesPoints}
           onClose={() => { editStatesShowPercentageTechs(prevStates => ({ ...prevStates, [project._id]: false })); }}
-          technologies={["html5", "css3", "javascript", "ejs", "typescript"]}
+          technologies={whiteListTechsUsedProject}
         />
       </S.Description>
     </S.Project>

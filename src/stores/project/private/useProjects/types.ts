@@ -1,3 +1,4 @@
+import { type IProjectEditabled } from '@/hooks/project/private/useEditProject/types';
 import { type IProjectPrivate } from '@/types/Project';
 
 export interface IDashboardData {
@@ -19,4 +20,6 @@ export interface IActions {
   setProjects: (projects: IProjectPrivate[] | null) => void;
   deleteProject: (idProject: string) => void;
   setDataDashboard: (projects: IProjectPrivate[] | null) => void;
+  addProject: (project: IProjectPrivate) => void;
+  updateProject: (idProject: string, fieldsEdit: IProjectEditabled) => void;
 }

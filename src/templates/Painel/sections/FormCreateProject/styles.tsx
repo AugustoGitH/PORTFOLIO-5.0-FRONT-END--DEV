@@ -2,11 +2,20 @@ import roots from "@/styles/roots";
 import { styled } from "styled-components";
 
 
-export const ManageProjects = styled.section`
-width: 100%;
-padding: 5rem 0;
+export const FormCreateProject = styled.section`
+margin-top: 3rem;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.4rem;
+  position: relative;
+  @media (max-width: 860px) {
+    width: 100%;
+  }
   form{
-    margin-top: 3rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -31,3 +40,16 @@ padding: 5rem 0;
   }
 
 `
+
+export const PopUpLoading = styled.div`
+  position: absolute;
+  width: 100%;
+  height: calc(100% + 2rem);
+  top: -1rem;
+  left: -1rem;
+  backdrop-filter: blur(3px);
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

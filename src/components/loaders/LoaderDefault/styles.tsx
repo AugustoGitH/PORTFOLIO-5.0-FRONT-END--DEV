@@ -1,29 +1,18 @@
 import styled from "styled-components";
 
 
-type TLoaderDefaultProps = {
-  color: "dark" | "light"
+interface ILoaderDefaultProps {
+  color: "dark" | "light",
+  size: "sm" | "md" | "lg"
 }
 
-export const LoaderDefault = styled.div<TLoaderDefaultProps>`
+export const LoaderDefault = styled.div<ILoaderDefaultProps>`
   .loader {
-    border: 4px solid ${props=> props.color === "dark" ? "var(--color-dark)" : "var(--color-light)"};
+    border: ${({ size }) => size === "lg" ? "5px" : size === "md" ? "4px" : size === "sm" ? "2px" : ""} solid ${({ color }) => color === "dark" ? "var(--color-dark)" : "var(--color-light)"};
     border-left-color: transparent;
     border-radius: 50%;
-  }
-
-  .loader {
-    border: 4px solid ${props=> props.color === "dark" ? "var(--color-dark)" : "var(--color-light)"};
-    border-left-color: transparent;
-    width: 36px;
-    height: 36px;
-  }
-
-  .loader {
-    border: 4px solid ${props=> props.color === "dark" ? "var(--color-dark)" : "var(--color-light)"};
-    border-left-color: transparent;
-    width: 36px;
-    height: 36px;
+    width: ${({ size }) => size === "lg" ? "45px" : size === "md" ? "36px" : size === "sm" ? "14px" : ""};
+    height: ${({ size }) => size === "lg" ? "45px" : size === "md" ? "36px" : size === "sm" ? "14px" : ""};
     animation: spin89345 1s linear infinite;
   }
 

@@ -32,6 +32,9 @@ ul {
 a {
   all: unset;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   color: var(--color-light);
   font-family: var(--font-Poppins);

@@ -1,3 +1,4 @@
+import { type IFormCreateProject } from '@/schemas/form/createProject/types';
 import apiRoutes from '@/services/constants/apiRoutes';
 import { api } from '@/services/settings/axios';
 import forceTypeReturn from '@/utils/forceTypeReturn';
@@ -6,7 +7,6 @@ import { AxiosError } from 'axios';
 import constants from '../constants';
 import {
   type IResponseFetchCreateProject,
-  type IFormCreateProject,
   type IResponseGetProject
 } from './types';
 
@@ -23,7 +23,8 @@ const createProject = async (
     );
     return {
       message: data.message,
-      created: true
+      created: true,
+      project: data.project
     };
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
@@ -31,12 +32,14 @@ const createProject = async (
         message:
           error.response?.data?.message ??
           constants.error.GENERIC_ERROR_CREATING_PROJECT,
-        created: false
+        created: false,
+        project: null
       };
     }
     return {
       message: constants.error.GENERIC_ERROR_CREATING_PROJECT,
-      created: false
+      created: false,
+      project: null
     };
   }
 };

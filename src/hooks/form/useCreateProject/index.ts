@@ -1,70 +1,59 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
 import schemaCreateProject from '@/schemas/form/createProject';
 import { type IFormCreateProject } from '@/schemas/form/createProject/types';
 import createProjectService from '@/services/authLevel/private/createProject';
+import useProjectsStore from '@/stores/project/private/useProjects';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { type IDefaultModelFormCreateProject } from './models/types';
-import { type IUseFormCreateProject, type IInfInputsBlockRepo } from './types';
-import verifyFormCreatedProject from './utils/verifyForm';
+import { type IUseFormCreateProject } from './types';
 
 const useCreateProject = (): IUseFormCreateProject => {
   const {
     register: registerInput,
     handleSubmit,
     control,
-    watch,
+    reset,
     formState: { errors }
   } = useForm<IFormCreateProject>({
     resolver: zodResolver(schemaCreateProject)
   });
 
-  const onSubmit: SubmitHandler<IFormCreateProject> = (data) => {
-    console.log(data);
+  const addProject = useProjectsStore((state) => state.addProject);
+
+  const [isCreatingProject, setIsCreatingProject] = useState(false);
+  const [isReset, setIsReset] = useState(false);
+
+  const onSubmit: SubmitHandler<IFormCreateProject> = async (data) => {
+    setIsCreatingProject(true);
+
+    const { created, message, project } = await createProjectService(data);
+
+    alert(message);
+    setIsCreatingProject(false);
+    if (created && project) {
+      addProject(project);
+      reset();
+      setIsReset(true);
+      setTimeout(() => {
+        setIsReset(false);
+      }, 100);
+    }
   };
 
   const registerForm = {
     onSubmit: handleSubmit(onSubmit)
   };
 
-  const inputsWatches = watch();
-
-  // const [isCreatingProject, setIsCreatingProject] = useState(false);
-  // const [isReset, setIsReset] = useState(false);
-
-  // const handleChangeAttrProject = (
-  //   key: keyof IFormCreateProject,
-  //   value: any
-  // ): void => {
-  //   setProject((prevProject) => ({ ...prevProject, [key]: value }));
-  // };
-
-  // const createProject = async (): Promise<void> => {
-  //   const { error, message } = verifyFormCreatedProject(project);
-
-  //   if (error) {
-  //     alert(message);
-  //     return;
-  //   }
-
-  //   setIsCreatingProject(true);
-
-  //   const {} = createProjectService(project)
-
-  // createProjectService(project).then((response) => {
-  //   const { created, message } = response;
-  //   setIsCreatingProject(false);
-  //   alert(message);
-  //   if (created) {
-  //     resetCreationForm();
-  //     queryClient.invalidateQueries(['projects']);
-  //   }
-  // });
-  // };
-
-  return { registerInput, registerForm, errors, control, inputsWatches };
+  return {
+    registerInput,
+    registerForm,
+    errors,
+    control,
+    isReset,
+    isCreatingProject
+  };
 };
 
 export default useCreateProject;
